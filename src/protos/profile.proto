@@ -1,0 +1,65 @@
+syntax = "proto3";
+package raisely.v1;
+
+service ProfileService {
+  rpc ListProfileDonations(ListProfileDonationsRequest) returns (ListProfileDonationsResponse);
+    // option (google.api.http) = {
+    //   get : "/v1/profiles/{profile_id}/donations"
+    // };
+  // };
+
+  rpc ListProfiles(ListProfilesRequest) returns (ListProfilesResponse);
+    // option (google.api.http) = {
+    //   get : "/v1/profiles"
+    // };
+  // };
+
+  rpc CreateProfileDonation(CreateProfileDonationRequest) returns (CreateProfileDonationResponse);
+    // option (google.api.http) = {
+    //   post : "/v1/profiles/{profile_id}/donations"
+    //   body : "donation"
+    // };
+  // };
+
+  rpc CreateCampaignDonation(CreateCampaignDonationRequest) returns (CreateCampaignDonationResponse);
+  //   option (google.api.http) = {
+  //     post : "/v1/donations"
+  //     body : "donation"
+  //   };
+  // };
+}
+
+message ListProfileDonationsRequest { string profile_id = 1; }
+message ListProfileDonationsResponse { repeated Donation donations = 1; }
+
+message ListProfilesRequest {}
+message ListProfilesResponse { repeated Profile profiles = 1;}
+
+message CreateProfileDonationRequest { Donation donation = 1;}
+message CreateProfileDonationResponse {}
+
+message CreateCampaignDonationRequest { Donation donation = 1;}
+message CreateCampaignDonationResponse {}
+
+message Donation {
+  string id = 1;
+  string donor_name = 2;
+  uint32 amount_in_cents = 3;
+  string profile_id = 4;
+  Currency currency = 5;
+}
+
+message Profile {
+  string id = 1;
+  string name = 2;
+  uint32 total_in_cents = 3;
+  string parent_id = 4;
+  Currency currency = 5;
+}
+
+enum Currency {
+  UNSPECIFIED = 0;
+  USD = 1;
+  AUD = 2;
+  EUR = 3;
+}

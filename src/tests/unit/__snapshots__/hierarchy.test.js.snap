@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Fail to update because team profile has an invalid parent id: { "code": "not_found", "meta": undefined, "msg": "Profile not found" } 1`] = `undefined`;
